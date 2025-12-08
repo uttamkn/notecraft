@@ -1,5 +1,5 @@
 {
-  "name": "NoteGenius",
+  "name": "NoteCraft",
   "description": "Convert handwritten notes into structured study guides using AI.",
   "requestFramePermissions": [
     "camera"

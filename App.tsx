@@ -66,7 +66,7 @@ export default function App() {
               <BrainCircuit size={24} />
             </div>
             <h1 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-blue-600 dark:from-primary-400 dark:to-blue-400">
-              NoteGenius
+              NoteCraft
             </h1>
           </div>
           
