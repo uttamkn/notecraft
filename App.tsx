@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { extractTextFromImage } from './services/ocr';
+import { extractTextFromFile } from './services/ocr';
 import { generateStudyMaterial } from './services/gemini';
 import ImageUpload from './components/ImageUpload';
 import StudyGuide from './components/StudyGuide';
@@ -27,7 +27,7 @@ export default function App() {
       // 1. OCR Step
       setState({ status: AppStatus.PROCESSING_OCR, progress: 0, message: "Extracting text from notes..." });
       
-      const rawText = await extractTextFromImage(file, (progress) => {
+      const rawText = await extractTextFromFile(file, (progress) => {
         setState(prev => ({ ...prev, progress: Math.floor(progress) }));
       });
 
