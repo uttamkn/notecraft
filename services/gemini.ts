@@ -1,6 +1,5 @@
 import { GoogleGenAI } from "@google/genai";
 
-// NOTE: You can set this via process.env.SERPER_API_KEY or replace the string below.
 const SERPER_API_KEY = process.env.SERPER_API_KEY || '';
 
 const SYSTEM_INSTRUCTION = `
