@@ -12,8 +12,7 @@ const StudyGuide: React.FC<StudyGuideProps> = ({ markdown }) => {
 
   // Extract video info (Title + ID) to provide a fallback search if the direct link fails
   const videoInfo = useMemo(() => {
-    // 1. Try to match the structured format requested in the prompt: **[Video] Title** - [Link](url)
-    // We try to capture the Title (Group 1) and the URL (Group 2)
+    // 1. Try to match the structured format requested in the prompt
     const structuredRegex = /\*\s*\*\*\[?Video\]?\s*(.*?)\*\*\s*-\s*\[.*?\]\((.*?)\)/i;
     const match = markdown.match(structuredRegex);
 
@@ -27,7 +26,7 @@ const StudyGuide: React.FC<StudyGuideProps> = ({ markdown }) => {
       }
     }
 
-    // 2. Fallback: Just find the first raw YouTube ID if the structured format fails
+    // 2. Fallback: Just find the first raw YouTube ID
     const simpleRegex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
     const simpleMatch = markdown.match(simpleRegex);
     
@@ -80,9 +79,9 @@ const StudyGuide: React.FC<StudyGuideProps> = ({ markdown }) => {
   };
 
   return (
-    <div className="w-full bg-white dark:bg-gray-800 rounded-lg shadow-xl overflow-hidden flex flex-col h-full animate-fade-in">
-      {/* Toolbar */}
-      <div className="p-4 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center bg-gray-50 dark:bg-gray-900/50 sticky top-0 z-10 backdrop-blur-md bg-opacity-90">
+    <div className="w-full bg-white dark:bg-gray-800 rounded-lg shadow-xl flex flex-col animate-fade-in min-h-[500px]">
+      {/* Toolbar - Sticky relative to window, adjusting for the main App header (approx 4rem/64px) */}
+      <div className="p-4 border-b border-gray-200 dark:border-gray-700 flex justify-between items-center bg-gray-50/95 dark:bg-gray-900/95 sticky top-16 z-30 backdrop-blur-md transition-all">
         <div className="flex items-center space-x-2 text-primary-600 dark:text-primary-400">
           <FileText size={20} />
           <h2 className="font-semibold text-lg hidden sm:block">Study Guide</h2>
@@ -105,12 +104,12 @@ const StudyGuide: React.FC<StudyGuideProps> = ({ markdown }) => {
         </div>
       </div>
       
-      {/* Content Area */}
-      <div className="flex-1 overflow-auto p-6 md:p-8 markdown-body">
+      {/* Content Area - No internal scroll, flows naturally */}
+      <div className="p-6 md:p-8 markdown-body">
         
         {/* Video Spotlight */}
         {videoInfo && (
-          <div className="mb-8 overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800">
+          <div className="mb-8 overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800 break-inside-avoid">
             <div className="flex flex-wrap items-center justify-between gap-2 border-b border-gray-200 px-4 py-3 dark:border-gray-700">
               <div className="flex items-center space-x-2 text-red-600 dark:text-red-400">
                 <Youtube size={20} />
